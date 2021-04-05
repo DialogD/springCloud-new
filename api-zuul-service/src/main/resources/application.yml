@@ -1,0 +1,40 @@
+
+spring:
+  application:
+    name: api-zuul-server
+#自定义路由规则，默认的规则依然生效
+zuul:
+  routes:
+    api-index:
+      path: /index/**
+      serviceId: index-service
+    api-product:
+      path: /product/**
+      serviceId: product-service
+  #统一入口为上面的配置，其他入口忽略
+  ignored-patterns: /*-service/**
+  #处理http请求头为空的问题
+  sensitive-headers: #默认zuul会屏蔽cookie，cookie不会传到下游服务，这里设置为空则取 消默认的黑名单，表
+  #示会传递到下游服务，比如product-service
+
+---
+
+spring:
+  profiles: zuulservice1
+server:
+  port: 10086
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/,http://localhost:8866/eureka/
+
+---
+
+spring:
+  profiles: zuulservice2
+server:
+  port: 10000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/,http://localhost:8866/eureka/

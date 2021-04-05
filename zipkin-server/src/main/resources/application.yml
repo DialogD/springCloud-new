@@ -1,0 +1,20 @@
+server:
+  port: 8868
+spring:
+  application:
+    name: zipkin-server
+  datasource:
+    username: root
+    password: 123
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///zipkin?useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT%2B8
+
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
+
+zipkin:
+  storage:
+    type: mysql

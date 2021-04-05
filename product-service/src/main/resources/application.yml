@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: product-service
+  zipkin:
+    base-url: http://localhost:8868
+  sleuth:
+    sampler:
+      probability: 1.0
+---
+
+spring:
+  profiles: productService1
+server:
+  port: 8080
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/,http://localhost:8866/eureka/
+
+---
+
+spring:
+  profiles: productService2
+server:
+  port: 8082
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/,http://localhost:8866/eureka/
+
+logging:
+  level:
+    root: info
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    org.springframework.cloud.sleuth: DEBUG

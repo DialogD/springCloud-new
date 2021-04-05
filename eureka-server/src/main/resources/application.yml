@@ -1,0 +1,40 @@
+
+#eureka:
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+#    service-url:
+#      defaultZone: http://localhost:${server.port}/eureka/
+#
+#server:
+#  port: 8888
+#  enable-self-preservation: false #关闭自我保护
+#  eviction-interval-timer-in-ms: 3000 #剔除服务间隔，单位毫秒
+
+spring:
+  application:
+    name: eureka-service
+---
+
+spring:
+  profiles: eurekaService1
+server:
+  port: 8888
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8866/eureka/
+
+---
+
+spring:
+  profiles: eurekaService2
+server:
+  port: 8866
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/
+
+
+

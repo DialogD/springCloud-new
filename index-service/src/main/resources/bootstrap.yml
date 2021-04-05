@@ -1,0 +1,32 @@
+
+server:
+  port: 9090
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/,http://localhost:8866/eureka/
+
+spring:
+  application:
+    name: index-service
+  zipkin:
+    base-url: http://localhost:8868
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1.0
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: CONFIG-SERVER
+  profiles:
+    active: dev
+
+logging:
+  level:
+    root: info
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    org.springframework.cloud.sleuth: DEBUG
